@@ -1,7 +1,11 @@
 // netlify/functions/news.js
 
 const SOURCES = [
-  { id: 'pagina12', name: 'Página/12', url: 'https://www.pagina12.com.ar/rss/portada', defaultCategory: 'politica' },
+  { id: 'pagina12', name: 'Página/12', url: 'https://www.pagina12.com.ar/arc/outboundfeeds/rss/portada', defaultCategory: 'politica' },
+  { id: 'p12-economia', name: 'P12 Economía', url: 'https://www.pagina12.com.ar/arc/outboundfeeds/rss/secciones/economia/notas', defaultCategory: 'economia' },
+  { id: 'p12-cultura', name: 'P12 Cultura', url: 'https://www.pagina12.com.ar/arc/outboundfeeds/rss/secciones/cultura/notas', defaultCategory: 'cultura' },
+  { id: 'p12-ciencia', name: 'P12 Ciencia', url: 'https://www.pagina12.com.ar/arc/outboundfeeds/rss/secciones/ciencia/notas', defaultCategory: 'ciencia' },
+  { id: 'p12-espectaculos', name: 'P12 Espectáculos', url: 'https://www.pagina12.com.ar/arc/outboundfeeds/rss/suplementos/cultura-y-espectaculos/notas', defaultCategory: 'cine' },
   { id: 'infobae', name: 'Infobae', url: 'https://www.infobae.com/arc/outboundfeeds/rss/', defaultCategory: 'politica' },
   { id: 'bbc', name: 'BBC Mundo', url: 'https://feeds.bbci.co.uk/mundo/rss.xml', defaultCategory: 'internacional' },
   { id: 'elpais', name: 'El País', url: 'https://feeds.elpais.com/mrss-s/pages/ep/portada', defaultCategory: 'internacional' },
