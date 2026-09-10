@@ -11,12 +11,12 @@ const SOURCES = [
 ];
 
 const CATEGORY_KEYWORDS = {
-  politica: ['congreso', 'senado', 'diputado', 'presidente', 'eleccion', 'gobierno', 'ley', 'ministro'],
-  economia: ['mercado', 'dólar', 'inflación', 'peso', 'banco', 'economía', 'bolsa', 'fmi', 'deuda'],
-  ciencia: ['científic', 'estudio', 'investigación', 'descubrimiento', 'universidad', 'nasa', 'genoma'],
-  tecnologia: ['ia', 'inteligencia artificial', 'app', 'software', 'tecnología', 'google', 'apple', 'chatgpt'],
-  cultura: ['arte', 'museo', 'libro', 'cultura', 'literatura', 'teatro', 'música'],
-  cine: ['película', 'cine', 'estreno', 'festival', 'director', 'actor', 'actriz', 'oscar', 'serie']
+  politica: ['congreso', 'senado', 'diputado', 'presidente', 'eleccion', 'gobierno', 'ley', 'ministro', 'política', 'legislatura', 'cámara', 'candidato'],
+  economia: ['mercado', 'dólar', 'inflación', 'peso', 'banco', 'economía', 'bolsa', 'fmi', 'deuda', 'acciones', 'bcra', 'tarifas', 'impuesto', 'afip'],
+  ciencia: ['científic', 'estudio', 'investigación', 'descubrimiento', 'universidad', 'nasa', 'genoma', 'célula', 'salud', 'medicina', 'vacuna', 'virus', 'espacio'],
+  tecnologia: ['ia', 'inteligencia artificial', 'app', 'software', 'tecnología', 'google', 'apple', 'chatgpt', 'celular', 'smartphone', 'redes', 'internet', 'datos'],
+  cultura: ['arte', 'museo', 'libro', 'cultura', 'literatura', 'teatro', 'música', 'exposición', 'artista', 'escritor', 'poeta', 'novela', 'cuento', 'danza', 'concierto', 'banda', 'cantante', 'álbum'],
+  cine: ['película', 'cine', 'estreno', 'festival', 'director', 'actor', 'actriz', 'oscar', 'serie', 'netflix', 'disney', 'streaming', 'film', 'trailer', 'hollywood', 'taquilla', 'producción']
 };
 
 function detectCategory(title, defaultCat) {
