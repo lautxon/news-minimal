@@ -4,7 +4,7 @@
  */
 
 // ⚠️ REEMPLAZA con la URL real de tu Worker de Cloudflare
-const WORKER_URL = 'https://wonderful-sunshine-dfe186.netlify.app';
+const WORKER_URL = 'https://minimal-news.netlify.app';
 
 const state = {
   category: 'all',
