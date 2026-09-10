@@ -4,7 +4,7 @@
  */
 
 // ⚠️ REEMPLAZA con la URL real de tu Worker de Cloudflare
-const WORKER_URL = 'https://minimal-news.netlify.app/.netlify/functions/news';
+const WORKER_URL = 'https://minimal-news.netlify.app';
 
 const state = {
   category: 'all',
@@ -30,7 +30,7 @@ async function fetchNews({ category = 'all', source = 'all' } = {}) {
   const params = new URLSearchParams({ category, source });
 
   try {
-    const response = await fetch(`${WORKER_URL}/api/news?${params}`, {
+    const response = await fetch(`${BASE_URL}/.netlify/functions/news?${params}`, {
       headers: { 'Accept': 'application/json' }
     });
 
