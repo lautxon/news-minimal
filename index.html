@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Noticias resumidas de Argentina y el mundo. Política, economía, ciencia y cultura.">
+  <meta name="theme-color" content="#121212">
+  
+  <title>News Minimal · Noticias al instante</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://news-fetcher.tu-usuario.workers.dev">
+</head>
+<body>
+  <header class="app-header">
+    <h1 class="app-title">
+      <span class="logo-dot">●</span>
+      News Minimal
+    </h1>
+    
+    <div class="header-controls">
+      <select id="source-select" aria-label="Filtrar por fuente">
+        <option value="all">Todas las fuentes</option>
+        <option value="pagina12">Página/12</option>
+        <option value="infobae">Infobae</option>
+        <option value="bbc">BBC Mundo</option>
+        <option value="elpais">El País</option>
+        <option value="nytimes">NYTimes</option>
+        <option value="wired">Wired</option>
+        <option value="sciencedaily">Science Daily</option>
+      </select>
+      
+      <span id="offline-status" class="offline-badge" aria-live="polite">🟢 Conectado</span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Categorías">
+    <button role="tab" aria-selected="true" data-category="all" class="tab">Todo</button>
+    <button role="tab" aria-selected="false" data-category="politica" class="tab">Política</button>
+    <button role="tab" aria-selected="false" data-category="economia" class="tab">Economía</button>
+    <button role="tab" aria-selected="false" data-category="ciencia" class="tab">Ciencia</button>
+    <button role="tab" aria-selected="false" data-category="tecnologia" class="tab">Tech</button>
+    <button role="tab" aria-selected="false" data-category="cultura" class="tab">Cultura</button>
+    <button role="tab" aria-selected="false" data-category="cine" class="tab">Cine</button>
+  </nav>
+
+  <main id="news-container" class="news-container" aria-live="polite">
+    <!-- Las noticias se inyectan aquí -->
+  </main>
+
+  <button id="install-btn" class="install-btn" hidden>
+    📲 Instalar app
+  </button>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
