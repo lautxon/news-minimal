@@ -33,7 +33,7 @@ function parseRSS(xmlText, source) {
   let match;
   let count = 0;
   
-  while ((match = itemRegex.exec(xmlText)) !== null && count < 25) {
+  while ((match = itemRegex.exec(xmlText)) !== null && count < 50) {
     const item = match[1];
     
     const getTag = (tag) => {
