@@ -3,8 +3,8 @@
  * Consume el Cloudflare Worker y renderiza las noticias.
  */
 
-// ⚠️ REEMPLAZA con la URL real de tu Worker de Cloudflare
-const WORKER_URL = 'https://minimal-news.netlify.app';
+// ⚠️ REEMPLAZA con la URL real de tu Worker de Netlify
+const WORKER_URL = 'https://minimal-news.netlify.app/.netlify/functions/news';
 
 const state = {
   category: 'all',
@@ -27,24 +27,16 @@ async function fetchNews({ category = 'all', source = 'all' } = {}) {
   state.loading = true;
   renderSkeleton();
 
+  // Creamos los parámetros de la URL (?category=all&source=all)
   const params = new URLSearchParams({ category, source });
 
   try {
-    const response = await fetch(`${BASE_URL}/.netlify/functions/news?${params}`, {
+    // ✅ LLAMADA CORREGIDA: Usa WORKER_URL directamente + los parámetros
+    const response = await fetch(`${WORKER_URL}?${params}`, {
       headers: { 'Accept': 'application/json' }
     });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const data = await response.json();
-    
-    // Guardar en localStorage como fallback offline
-    if (data.articles?.length > 0) {
-      localStorage.setItem('news_cache', JSON.stringify({
-        articles: data.articles,
-        timestamp: Date.now()
-      }));
-    }
 
     state.articles = data.articles || [];
     state.loading = false;
