@@ -1,9 +1,19 @@
 const CACHE_NAME = 'news-minimal-v1';
-const ASSETS = ['/', '/index.html', '/style.css', '/app.js', '/manifest.json'];
+
+// ✅ Quitamos los iconos de esta lista temporalmente para que no falle la instalación
+const ASSETS = [
+  '/',
+  '/index.html',
+  '/style.css',
+  '/app.js',
+  '/manifest.json'
+];
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(ASSETS);
+    })
   );
   self.skipWaiting();
 });
@@ -20,21 +30,24 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const { request } = event;
   
-  // Las noticias SIEMPRE van a la red primero (para que sean frescas)
+  // Las noticias SIEMPRE van a la red primero (Network First)
   if (request.url.includes('workers.dev')) {
     event.respondWith(
       fetch(request)
         .then(res => {
-          const clone = res.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+          // Solo guardamos en caché si la respuesta es exitosa
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+          }
           return res;
         })
-        .catch(() => caches.match(request))
+        .catch(() => caches.match(request)) // Fallback a caché si no hay red
     );
     return;
   }
   
-  // Resto de assets: cache first
+  // Resto de assets: Cache First
   event.respondWith(
     caches.match(request).then(res => res || fetch(request))
   );
