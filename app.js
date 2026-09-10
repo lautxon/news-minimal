@@ -4,7 +4,7 @@
  */
 
 // ⚠️ REEMPLAZA con la URL real de tu Worker de Cloudflare
-const WORKER_URL = 'http://news-minimal.el-laucha-web.workers.dev';
+const WORKER_URL = 'https://news-minimal.el-laucha-web.workers.dev';
 
 const state = {
   category: 'all',
