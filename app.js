@@ -27,17 +27,28 @@ async function fetchNews({ category = 'all', source = 'all' } = {}) {
   state.loading = true;
   renderSkeleton();
 
-  // Creamos los parámetros de la URL (?category=all&source=all)
   const params = new URLSearchParams({ category, source });
 
   try {
-    // ✅ LLAMADA CORREGIDA: Usa WORKER_URL directamente + los parámetros
+    // 1. Hacemos la petición a Netlify
     const response = await fetch(`${WORKER_URL}?${params}`, {
       headers: { 'Accept': 'application/json' }
     });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
+    // 2. ✅ ESTA ERA LA LÍNEA QUE FALTABA: Convertimos la respuesta a JSON
+    const data = await response.json();
+
+    // 3. Guardamos en caché local por si se va el internet
+    if (data.articles && data.articles.length > 0) {
+      localStorage.setItem('news_cache', JSON.stringify({
+        articles: data.articles,
+        timestamp: Date.now()
+      }));
+    }
+
+    // 4. Actualizamos el estado y renderizamos
     state.articles = data.articles || [];
     state.loading = false;
     renderArticles();
@@ -46,21 +57,22 @@ async function fetchNews({ category = 'all', source = 'all' } = {}) {
     console.error('Fetch error:', error);
     state.loading = false;
     
-    // Intentar cargar desde caché local
+    // 5. Fallback: Si falla la red, intentamos mostrar lo último guardado
     const cached = localStorage.getItem('news_cache');
     if (cached) {
-      const { articles } = JSON.parse(cached);
-      let filtered = [...articles];
+      const parsedCache = JSON.parse(cached);
+      let filtered = [...parsedCache.articles];
+      
       if (category !== 'all') filtered = filtered.filter(a => a.category === category);
       if (source !== 'all') filtered = filtered.filter(a => a.source === source);
+      
       state.articles = filtered;
-      renderArticles(true);
+      renderArticles(true); // true indica que es modo offline
     } else {
       renderError('No se pudieron cargar las noticias. Verificá tu conexión.');
     }
   }
 }
-
 // === RENDERIZADO ===
 function renderSkeleton() {
   const skeletons = Array(4).fill('').map(() => `
